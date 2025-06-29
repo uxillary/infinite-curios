@@ -7,23 +7,32 @@
 /* Core theme configuration */
 @theme {
   /* Font families */
-  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+  --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
   /* Colors */
-  /* Copied from https://tailwindcss.com/docs/theme#default-theme-variable-reference */
-  --color-primary-50: oklch(0.971 0.014 343.198);
-  --color-primary-100: oklch(0.948 0.028 342.258);
-  --color-primary-200: oklch(0.899 0.061 343.231);
-  --color-primary-300: oklch(0.823 0.12 346.018);
-  --color-primary-400: oklch(0.718 0.202 349.761);
-  --color-primary-500: oklch(0.656 0.241 354.308);
-  --color-primary-600: oklch(0.592 0.249 0.584);
-  --color-primary-700: oklch(0.525 0.223 3.958);
-  --color-primary-800: oklch(0.459 0.187 3.815);
-  --color-primary-900: oklch(0.408 0.153 2.432);
-  --color-primary-950: oklch(0.284 0.109 3.907);
+  --color-primary-50: #eaf2f9;
+  --color-primary-100: #d4e4f3;
+  --color-primary-200: #a8c9e7;
+  --color-primary-300: #7cade0;
+  --color-primary-400: #5294d4;
+  --color-primary-500: #327eca; /* Brand Blue */
+  --color-primary-600: #285f99; /* Hover Blue */
+  --color-primary-700: #1d446b;
+  --color-primary-800: #142f4a;
+  --color-primary-900: #0b1b2a;
+  --color-primary-950: #050d15;
 
+  --color-accent-500: #ff6347; /* Coral Accent */
+  --color-accent-600: #e2533a; /* Coral Hover */
+
+  --color-secondary-500: #3edbf0; /* Mint Accent */
+  --color-secondary-600: #31c3d7; /* Mint Hover */
+
+  --color-dark-500: #141c27; /* Charcoal */
+  --color-light-500: #f7f7f7; /* Off-White */
+
+  /* Gray palette stays as is */
   --color-gray-50: oklch(0.985 0.002 247.839);
   --color-gray-100: oklch(0.967 0.003 264.542);
   --color-gray-200: oklch(0.928 0.006 264.531);
@@ -48,14 +57,6 @@
   --z-80: 80;
 }
 
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
@@ -83,7 +84,7 @@
     & a {
       color: var(--color-primary-500);
       &:hover {
-        color: var(--color-primary-600);
+        color: var(--color-accent-500);
       }
       & code {
         color: var(--color-primary-400);
@@ -97,7 +98,7 @@
       font-weight: 600;
     }
     & :where(code):not(pre code) {
-      color: var(--color-indigo-500);
+      color: var(--color-secondary-500);
     }
   }
 
@@ -105,7 +106,7 @@
     & a {
       color: var(--color-primary-500);
       &:hover {
-        color: var(--color-primary-400);
+        color: var(--color-accent-500);
       }
       & code {
         color: var(--color-primary-400);
@@ -146,7 +147,6 @@
   scrollbar-width: none; /* Firefox */
 }
 
-/* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
 input:-webkit-autofill,
 input:-webkit-autofill:focus {
   transition:
