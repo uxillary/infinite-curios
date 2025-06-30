@@ -1,7 +1,7 @@
 /** @type {import("pliny/config").PlinyConfig } */
 const siteMetadata = {
   title: 'Infinite Curios',
-  author: 'Infinite Curios',
+  author: 'Adam C Johnston',
   headerTitle: 'Infinite Curios',
   description: 'Exploring the curious corners of tech, nostalgia, and the internet.',
   language: 'en-us',
@@ -11,9 +11,9 @@ const siteMetadata = {
   siteLogo: `${process.env.BASE_PATH || ''}/static/images/logo.svg`,
   socialBanner: `${process.env.BASE_PATH || ''}/static/images/twitter-card.png`,
   mastodon: '',
-  email: 'hello@infinitecurios.blog',
-  github: 'https://github.com/uxillary',
-  x: 'https://twitter.com', // Update if you create an account
+  email: 'mail@infinitecurios.blog',
+  github: 'https://github.com/uxillary/infinite-curios',
+  x: 'https://x.com/infinitecurios_', // Update if you create an account
   facebook: '',
   youtube: '',
   linkedin: '',
@@ -23,10 +23,8 @@ const siteMetadata = {
   bluesky: '',
   locale: 'en-US',
   stickyNav: false,
-  analytics: {
-    umamiAnalytics: {
-      umamiWebsiteId: process.env.NEXT_UMAMI_ID,
-    },
+  googleAnalytics: {
+    googleAnalyticsId: 'G-7B8BGR6V2V', // e.g. G-XXXXXXX
   },
   newsletter: {
     provider: '', // Leave empty if not using
@@ -41,7 +39,7 @@ const siteMetadata = {
       mapping: 'pathname',
       reactions: '1',
       metadata: '0',
-      theme: 'light',
+      theme: 'dark',
       darkTheme: 'transparent_dark',
       themeURL: '',
       lang: 'en',
