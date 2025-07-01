@@ -27,8 +27,6 @@ const siteMetadata = {
     plausibleAnalytics: '',
     simpleAnalytics: false,
     umamiAnalytics: '',
-  },
-  googleAnalytics: {
     googleAnalyticsId: 'G-7B8BGR6V2V',
   },
   newsletter: {
