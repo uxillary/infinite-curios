@@ -1,8 +1,14 @@
 {
-  "ecu-remapping": 1,
+  "remapping": 1,
   "tuning": 1,
   "automotive": 1,
   "minimalism": 1,
   "lifestyle": 1,
-  "wellness": 1
+  "wellness": 1,
+  "incident-report": 1,
+  "devops": 1,
+  "infrastructure": 1,
+  "health": 1,
+  "nutrition": 1,
+  "fasting": 1
 }

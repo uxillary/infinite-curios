@@ -56,7 +56,6 @@ const securityHeaders = [
 
 const output = 'export'
 const basePath = process.env.BASE_PATH || undefined
-const unoptimized = process.env.UNOPTIMIZED ? true : undefined
 
 /**
  * @type {import('next/dist/next-server/server/config').NextConfig}
@@ -80,7 +79,7 @@ module.exports = () => {
           hostname: 'picsum.photos',
         },
       ],
-      unoptimized,
+      unoptimized: true, // Force this on to fix your error
     },
     async headers() {
       return [
