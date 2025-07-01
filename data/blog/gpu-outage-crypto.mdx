@@ -1,0 +1,33 @@
+---
+title: 'When Updates Attack: Our GPU Outage and the Great Crypto Fake-Out'
+date: '2024-06-10'
+tags: ['Incident Report', 'DevOps', 'Infrastructure']
+draft: false
+summary: A routine OS update sidelined our GPU servers, sparking jokes about secret crypto mines. Here's how we got back online.
+---
+
+# When Updates Attack: Our GPU Outage and the Great Crypto Fake-Out
+
+Late on June 9, our fleet of GPU servers suddenly went dark. Error rates skyrocketed—ChatGPT requests failed nearly a third of the time, and API traffic stumbled too. We briefly wondered if our GPUs had gone rogue, secretly mining crypto in a hidden bunker. Alas, the culprit was far less glamorous: a routine host OS update.
+
+## What Went Wrong?
+
+A nightly update restarted `systemd-networkd`, which clashed with our networking agent. The result? All routing tables vanished, leaving the affected nodes isolated from the network. With no routes to follow, it looked like our servers were prepping for a side gig in crypto mining.
+
+### The Timeline
+
+- **June 9, 11:36 PM PDT** – Alerts triggered as GPU nodes dropped off the network.
+- **June 10, 2:00 AM PDT** – Error rates peaked around 35% for ChatGPT and 25% for the API.
+- **June 10, 3:00 PM PDT** – After re-imaging nodes and halting automatic updates, services were fully restored.
+
+## The Fix
+
+1. **Re-imaging affected nodes** to restore connectivity.
+2. **Disabling automatic updates** on GPU VMs so we can roll them out on our schedule.
+3. **Tweaking configurations** to keep `systemd-networkd` from butting heads with our networking agent.
+
+## Looking Forward
+
+We’re auditing configurations across our fleet, improving our recovery tools, and planning regular disaster drills. Hopefully the next time our GPUs act up, it’ll just be because they’re dreaming of crypto coins—not because our network vanished.
+
+Thanks for sticking with us while we worked through the chaos. We’re committed to keeping our infrastructure solid… and avoiding accidental crypto farms.
