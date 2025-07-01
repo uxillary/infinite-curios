@@ -1,0 +1,148 @@
+---
+title: Top 10 GitHub Actions to Automate Your Blog
+date: '2025-07-01'
+tags: ['GitHub Actions', 'Blog Automation', '2025']
+draft: false
+summary: Explore ten powerful GitHub Actions that streamline publishing, improve quality, and keep your blog running smoothly.
+---
+
+# Top 10 GitHub Actions to Automate Your Blog
+
+GitHub Actions can handle many routine tasks involved in running a blog—from building and deploying your site to ensuring each post meets quality standards. This pillar content explores the most useful Actions to automate your blogging workflow so you can focus on writing great content.
+
+## 1. Build and Deploy with GitHub Pages
+
+A common approach for static blogs is to use GitHub Pages as the hosting platform. The **GitHub Pages Deploy** action automatically builds your site and publishes it whenever you push new content.
+
+```yaml
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v3
+      - uses: actions/upload-pages-artifact@v2
+        with:
+          path: out
+      - uses: actions/deploy-pages@v1
+```
+
+This workflow runs on every push to `main`, generates your static files, and then deploys them to GitHub Pages. It ensures your site stays up to date without manual intervention.
+
+## 2. Automated Image Optimization
+
+Large image files can slow down your site. The **calibreapp/image-actions** action compresses images automatically when they’re added to the repository.
+
+```yaml
+- uses: calibreapp/image-actions@v1
+  with:
+    compress_only: 'true'
+```
+
+Add this step before deployment to reduce file sizes and speed up page loads. The action supports popular formats such as PNG and JPEG.
+
+## 3. Markdown Linting
+
+Consistent formatting improves readability. **markdownlint** helps catch style issues in your `.md` or `.mdx` files. It warns about problems such as missing headings or incorrect line breaks.
+
+```yaml
+- name: Lint Markdown
+  uses: avto-dev/markdown-lint@v1
+```
+
+Integrate this action into a pull request workflow so each new post adheres to your style guide.
+
+## 4. Broken Link Checker
+
+Keeping links functional is crucial for user experience and SEO. Use the **lycheeverse/lychee-action** to scan for broken links whenever a pull request is opened.
+
+```yaml
+- name: Check links
+  uses: lycheeverse/lychee-action@v1
+  with:
+    args: --verbose ./data/blog
+```
+
+The action scans your markdown files and reports dead links, helping you fix them before publishing.
+
+## 5. Spellcheck and Grammar
+
+Typos can undermine your credibility. The **rojopolis/spellcheck-github-actions** workflow runs a spellchecker on your posts and comments on pull requests with any issues it finds.
+
+```yaml
+- name: Spellcheck
+  uses: rojopolis/spellcheck-github-actions@v0.20.0
+```
+
+Review the output and commit corrections to keep your articles polished.
+
+## 6. Automatic Pull Request Labeling
+
+If multiple authors contribute to your blog, automatically labeling PRs can streamline triage. **actions/labeler** applies labels based on changed file paths or titles.
+
+```yaml
+- uses: actions/labeler@v4
+```
+
+For example, you might label all changes in `data/blog` as `blog-post`. This helps you filter and review posts quickly.
+
+## 7. Scheduled Content Publishing
+
+You can schedule posts to go live at specific times using cron syntax. Combine `schedule` triggers with your deployment action to publish posts automatically.
+
+```yaml
+on:
+  schedule:
+    - cron: '0 12 * * 5'
+```
+
+The above example runs every Friday at noon (UTC), ideal for weekly roundups or timed announcements.
+
+## 8. SEO Checks
+
+Actions like **treosh/lighthouse-ci-action** analyze your site’s performance and SEO metrics. Integrating this into your workflow highlights issues affecting search visibility.
+
+```yaml
+- name: Lighthouse CI
+  uses: treosh/lighthouse-ci-action@v11
+  with:
+    configPath: '.lighthouserc.js'
+```
+
+The reports provide insight into accessibility, best practices, and search engine readiness.
+
+## 9. Backup to Cloud Storage
+
+Safeguard your content by backing up your repository to cloud storage like AWS S3. **jakejarvis/s3-sync-action** can mirror your repo’s `data` directory or entire site.
+
+```yaml
+- name: Upload backup
+  uses: jakejarvis/s3-sync-action@v0.11.0
+  with:
+    args: --acl private --follow-symlinks
+```
+
+Having an offsite backup protects you if something goes wrong with your primary host.
+
+## 10. Social Media Sharing
+
+After each deployment, automatically share your latest post on social media. The **appleboy/telegram-action** or custom actions using the Twitter API can broadcast updates for you.
+
+```yaml
+- name: Post to Telegram
+  uses: appleboy/telegram-action@v0.1.0
+  with:
+    to: ${{ secrets.TELEGRAM_CHAT_ID }}
+    token: ${{ secrets.TELEGRAM_TOKEN }}
+    message: 'New blog post published!'
+```
+
+Linking your workflow to social accounts saves time and helps drive traffic to new articles.
+
+## Final Thoughts
+
+By combining these GitHub Actions, you can automate key parts of your blogging workflow—from deployment and quality checks to backups and promotion. Start with a basic deploy action and gradually add more features as your blog grows. Automation not only saves time but also ensures a consistent and reliable experience for your readers.
