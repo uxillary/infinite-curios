@@ -95,7 +95,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0103781347588761"
         crossOrigin="anonymous"
       ></script>
-      <script async src={`https://www.googletagmanager.com/gtag/js?id=G-7B8BGR6V2V`}></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-7B8BGR6V2V"></script>
       <script
         dangerouslySetInnerHTML={{
           __html: `
@@ -103,7 +103,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
-            gtag('config', 'G-7B8BGR6V2V');
+            gtag('config', 'G-7B8BGR6V2V', { page_path: window.location.pathname });
           `,
         }}
       ></script>
