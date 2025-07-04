@@ -2,11 +2,12 @@ name: Blog Post Counter
 
 on:
   schedule:
-    - cron: '0 8 */2 * *'  # Runs every 2 days at 08:00 UTC
+    - cron: '0 8 * * 1'  # Runs every Monday at 08:00 UTC
   workflow_dispatch:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   count_posts:
@@ -23,10 +24,23 @@ jobs:
           DATE=$(date -u +'%Y-%m-%d %H:%M:%S UTC')
           echo "Blog posts as of $DATE: $COUNT" > data/blog-count.txt
 
-      - name: Commit and Push
+      - name: Commit changes to new branch
         run: |
+          BRANCH="update-blog-count-$(date +'%Y%m%d%H%M%S')"
           git config --global user.name "uxillary"
           git config --global user.email "adam@ajstudios.dev"
+          git checkout -b $BRANCH
           git add data/blog-count.txt
-          git diff --cached --quiet || git commit -m "📝 Update blog post count"
-          git push
+          git commit -m "📝 Update blog post count"
+          git push origin $BRANCH
+
+          echo "branch=$BRANCH" >> $GITHUB_ENV
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "📝 Update blog post count"
+          branch: ${{ env.branch }}
+          title: "Blog Post Count Update"
+          body: "This PR automatically updates the blog post count."
