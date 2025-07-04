@@ -1,0 +1,32 @@
+name: Blog Post Counter
+
+on:
+  schedule:
+    - cron: '0 8 */2 * *'  # Runs every 2 days at 08:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  count_posts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Count Blog Posts
+        run: |
+          mkdir -p data  # Adjust if your site uses a different directory
+          COUNT=$(find data/blog -type f -name '*.mdx' | wc -l)
+          DATE=$(date -u +'%Y-%m-%d %H:%M:%S UTC')
+          echo "Blog posts as of $DATE: $COUNT" > data/blog-count.txt
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "uxillary"
+          git config --global user.email "adam@ajstudios.dev"
+          git add data/blog-count.txt
+          git diff --cached --quiet || git commit -m "📝 Update blog post count"
+          git push
