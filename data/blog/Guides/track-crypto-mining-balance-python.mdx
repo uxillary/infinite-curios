@@ -1,0 +1,60 @@
+---
+title: How to Track Your Crypto Mining Balance with Python (Step-by-Step)
+date: '2025-07-03'
+tags: ['Crypto', 'Python', 'Guide']
+draft: false
+summary: Learn how to monitor your Monero mining rewards using a simple Python script and the tray-xmr app.
+---
+
+# How to Track Your Crypto Mining Balance with Python (Step-by-Step)
+
+If you mine cryptocurrency like **Monero (XMR)**, keeping an eye on your unpaid balance helps you know when a payout is coming. This guide walks through building a small Python script that checks your balance via the [SupportXMR](https://supportxmr.com) pool API. We'll also look at [tray-xmr](https://github.com/uxillary/tray-xmr), a handy project that displays your balance in the Windows system tray.
+
+## 1. Set Up Your Python Environment
+
+You'll need Python 3 and `requests` installed:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install requests
+```
+
+## 2. Fetch Your Balance from SupportXMR
+
+Create a file named `check_balance.py` and paste the code below, replacing `YOUR_WALLET_ADDRESS` with your actual XMR address:
+
+```python
+import requests
+
+WALLET = 'YOUR_WALLET_ADDRESS'
+URL = f'https://supportxmr.com/api/miner/{WALLET}/stats'
+
+resp = requests.get(URL, timeout=10)
+data = resp.json()
+balance = data.get('stats', {}).get('balance', data.get('amtDue', 0)) / 1e12
+print(f'Current balance: {balance:.6f} XMR')
+```
+
+Run the script with `python check_balance.py` to see your current unpaid balance.
+
+## 3. Get Desktop Notifications with tray-xmr
+
+The [tray-xmr](https://github.com/uxillary/tray-xmr) project expands on this idea. It shows your balance in a tray icon and notifies you when you're ready for payout. Clone the repo and run the script inside the `v1` directory (Windows is required):
+
+```bash
+git clone https://github.com/uxillary/tray-xmr.git
+cd tray-xmr/v1
+python xmr_tray.py
+```
+
+The app checks your balance once an hour and pops up a notification when you reach the payout threshold.
+
+## 4. Customize the Script
+
+Feel free to modify `xmr_tray.py` or your own script to adjust the check interval, notification text, or payout threshold. Since the project is open source, you can adapt it for other mining pools or even integrate it with a dashboard.
+
+## Conclusion
+
+With just a bit of Python, you can automatically monitor your mining rewards and get notified when it's time to cash out. Exploring the tray-xmr project is a great way to see how a simple script can evolve into a helpful desktop utility.
+
