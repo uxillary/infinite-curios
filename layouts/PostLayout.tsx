@@ -10,6 +10,7 @@ import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import ScrollTopAndComment from '@/components/ScrollTopAndComment'
 import SocialShare from '@/components/SocialShare'
+import AdUnit from '@/components/AdUnit'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
@@ -101,6 +102,7 @@ export default function PostLayout({ content, authorDetails, next, prev, childre
                 summary={content.social?.summary || title}
                 hashtags={content.social?.hashtags || ''}
               />
+              <AdUnit />
 
               <div className="pt-6 pb-6 text-sm text-gray-700 dark:text-gray-300">
                 <Link href={discussUrl(path).replace('mobile.twitter.com', 'x.com')} rel="nofollow">
