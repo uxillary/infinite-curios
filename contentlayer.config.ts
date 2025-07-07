@@ -107,6 +107,7 @@ export const Blog = defineDocumentType(() => ({
     images: { type: 'json' },
     authors: { type: 'list', of: { type: 'string' } },
     layout: { type: 'string' },
+    social: { type: 'json', required: false },
     bibliography: { type: 'string' },
     canonicalUrl: { type: 'string' },
   },
@@ -143,6 +144,7 @@ export const Authors = defineDocumentType(() => ({
     linkedin: { type: 'string' },
     github: { type: 'string' },
     layout: { type: 'string' },
+    social: { type: 'json', required: false },
   },
   computedFields,
 }))
