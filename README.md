@@ -181,13 +181,18 @@ npx degit 'timlrx/tailwind-nextjs-starter-blog'
 ```
 
 2. Personalize `siteMetadata.js` (site related information)
-3. Modify the content security policy in `next.config.js` if you want to use
+3. Copy `.env.example` to `.env.local` and fill in the required Giscus values
+   (`NEXT_PUBLIC_GISCUS_REPO`, `NEXT_PUBLIC_GISCUS_REPOSITORY_ID`,
+   `NEXT_PUBLIC_GISCUS_CATEGORY`, `NEXT_PUBLIC_GISCUS_CATEGORY_ID`). Without
+   these variables the **Load Comments** button will not load the discussion
+   section.
+4. Modify the content security policy in `next.config.js` if you want to use
    other analytics provider or a commenting solution other than giscus.
-4. Personalize `authors/default.md` (main author)
-5. Modify `projectsData.ts`
-6. Modify `headerNavLinks.ts` to customize navigation links
-7. Add blog posts
-8. Deploy on Vercel
+5. Personalize `authors/default.md` (main author)
+6. Modify `projectsData.ts`
+7. Modify `headerNavLinks.ts` to customize navigation links
+8. Add blog posts
+9. Deploy on Vercel
 
 ## Installation
 
