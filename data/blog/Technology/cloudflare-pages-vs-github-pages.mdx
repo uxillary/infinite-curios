@@ -1,0 +1,48 @@
+---
+title: Cloudflare Pages vs GitHub Pages: Which Should You Use?
+date: '2025-07-10'
+tags: ['Hosting', 'Cloudflare', 'GitHub', 'Static Sites']
+draft: false
+summary: A balanced look at what each platform offers, plus a lesser-known difference in caching flexibility that can influence your decision.
+---
+
+# Cloudflare Pages vs GitHub Pages: Which Should You Use?
+
+Static site hosting is no longer niche. Two of the most popular options are **GitHub Pages** and **Cloudflare Pages**. They both aim to make deployments effortless, yet their approaches differ in ways that matter depending on your workflow.
+
+## Ease of Setup
+
+GitHub Pages is tightly integrated with GitHub repositories. With a few clicks, you can publish directly from the `main` branch or a `/docs` folder. Cloudflare Pages connects to GitHub (or other providers) but requires granting access to your repository and configuring build settings.
+
+- **GitHub Pages**: Simple if you're already on GitHub. No extra accounts needed.
+- **Cloudflare Pages**: Slightly more steps, but still straightforward. Supports GitLab and other providers via OAuth.
+
+## Deployment Speed
+
+Cloudflare Pages uses Cloudflare's global network for builds and serves your site from edge locations worldwide. GitHub Pages builds run on GitHub's infrastructure and are cached via their CDN (currently powered by Fastly). In practice, Cloudflare often finishes builds a bit faster, especially for larger sites, though the difference may be seconds.
+
+## Custom Domains and SSL
+
+Both services provide free SSL certificates and let you add custom domains. GitHub Pages manages DNS through your domain provider, while Cloudflare offers built‑in DNS with advanced controls if you transfer your domain to them.
+
+## Unique Caching Flexibility
+
+One lesser‑known edge for Cloudflare Pages is the ability to set custom caching rules directly within the platform. Because it's backed by Cloudflare's CDN, you can define how long assets are cached, enable stale‑while‑revalidate behavior, or even bypass cache for specific routes. GitHub Pages uses a simpler caching model with fixed headers—you can't tweak TTLs or revalidation without an external service. For sites that rely on frequent asset changes or partial updates, this extra caching control can reduce rebuilds and cut bandwidth costs.
+
+## Dynamic Features
+
+GitHub Pages is purely static. To add forms or server‑side logic, you typically rely on third‑party services. Cloudflare Pages integrates with **Cloudflare Workers**, letting you run lightweight functions at the edge. This unlocks features like authentication or API endpoints without leaving the platform.
+
+## Pricing and Limits
+
+Both platforms have generous free tiers. GitHub Pages is entirely free for public repositories, while Cloudflare Pages offers unlimited sites with usage‑based bandwidth after a generous allocation. Private repos on GitHub require a paid plan, whereas Cloudflare doesn't charge based on repository privacy.
+
+## When to Choose Each
+
+- **Choose GitHub Pages** if you maintain a simple static site within a public repository and want the most frictionless GitHub workflow.
+- **Choose Cloudflare Pages** if you need advanced caching, plan to add edge functions, or want tighter integration with Cloudflare's DNS and security tools.
+
+## Final Thoughts
+
+Neither service is objectively "better"—they cater to slightly different needs. For a hobby project or documentation site, GitHub Pages might be perfect. If your site grows to require edge logic or fine‑grained caching, Cloudflare Pages is worth a look. Understanding these nuances helps you pick the platform that matches your roadmap.
+
