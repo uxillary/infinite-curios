@@ -7,9 +7,18 @@ import siteMetadata from '@/data/siteMetadata'
 export default function Comments({ slug }: { slug: string }) {
   const [loadComments, setLoadComments] = useState(false)
 
-  if (!siteMetadata.comments?.provider) {
+  const giscus = siteMetadata.comments?.giscusConfig
+  const isConfigured =
+    siteMetadata.comments?.provider === 'giscus' &&
+    giscus?.repo &&
+    giscus?.repositoryId &&
+    giscus?.category &&
+    giscus?.categoryId
+
+  if (!isConfigured) {
     return null
   }
+
   return (
     <>
       {loadComments ? (
