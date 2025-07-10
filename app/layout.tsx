@@ -12,6 +12,7 @@ import Header from '@/components/Header'
 import SectionContainer from '@/components/SectionContainer'
 import Footer from '@/components/Footer'
 import siteMetadata from '@/data/siteMetadata'
+import Script from 'next/script'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
 
@@ -93,23 +94,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         href={`${basePath}/static/favicons/safari-pinned-tab.svg`}
         color="#5bbad5"
       />
-      <script
-        async
+      <Script
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0103781347588761"
+        strategy="afterInteractive"
         crossOrigin="anonymous"
-      ></script>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-7B8BGR6V2V"></script>
-      <script
+      />
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${siteMetadata.analytics.googleAnalyticsId}`}
+        strategy="afterInteractive"
+      />
+      <Script
+        id="ga"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-
-            gtag('config', 'G-7B8BGR6V2V', { page_path: window.location.pathname });
+            gtag('config', '${siteMetadata.analytics.googleAnalyticsId}', { page_path: window.location.pathname });
           `,
         }}
-      ></script>
+      />
       <meta name="msapplication-TileColor" content="#000000" />
       <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
       <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
