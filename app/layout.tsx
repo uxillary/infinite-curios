@@ -99,10 +99,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         strategy="afterInteractive"
         crossOrigin="anonymous"
       />
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${siteMetadata.analytics.googleAnalyticsId}`}
-        strategy="afterInteractive"
-      />
+      {siteMetadata.analytics?.googleAnalyticsId && (
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${siteMetadata.analytics.googleAnalyticsId}`}
+          strategy="afterInteractive"
+        />
+      )}
       <Script
         id="ga"
         strategy="afterInteractive"
